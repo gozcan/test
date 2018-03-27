@@ -10,6 +10,39 @@ use Socialite;
 
 class LoginController extends Controller
 {
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        {
+            $user = Socialite::driver('github')->user();
+
+            // $user->token;
+        };
+    }
+
+    private function findOrCreateUser($githubUser)
+    {
+        if ($authUser = User::where('github_id', $githubUser->id)->first()) {
+            return $authUser;
+        }
+
+        return User::create([
+            'name' => $githubUser->name,
+            'email' => $githubUser->email,
+            'linkedin_id' => $githubUser->id,
+            'avatar' => $githubUser->avatar
+        ]);
+    }
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -40,42 +73,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider()
-    {
-        return Socialite::driver('github')->redirect();
-    }
-
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallback()
-    {
-        try {
-            $user = Socialite::driver('github')->user();
-        } catch (Exception $e) {
-            return Redirect::to('auth/github');
-        }
-
-        $authUser = $this->findOrCreateUser($user);
-
-        Auth::login($authUser, true);
-
-        return Redirect::to('home');
-    }
-
-    private function findOrCreateUser($githubUser)
-    {
-        if ($authUser = User::where('github_id', $githubUser->id)->first()) {
-            return $authUser;
-        }
-
-        return User::create([
-            'name' => $githubUser->name,
-            'email' => $githubUser->email,
-            'linkedin_id' => $githubUser->id,
-            'avatar' => $githubUser->avatar
-        ]);
-    }
 }

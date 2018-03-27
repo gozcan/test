@@ -65,7 +65,7 @@
                             <label class="col-sm-4 col-form-label text-md-right"></label>
 
                             <div class="col-md-6">
-                                <a href="auth/github">
+                                <a href="{{route('authgithub')}}">
                                     <img src="https://mattstauffer.com/assets/images/content/Screen-Shot-2015-07-16-at-1.45.52-PM.png" alt="Github login button">
                                 </a>
                             </div>
