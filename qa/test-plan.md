@@ -1,4 +1,4 @@
-# QA Plan
+﻿# QA Plan
 
 ## Test pyramid strategy
 
