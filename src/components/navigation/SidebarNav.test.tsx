@@ -14,7 +14,8 @@ describe("SidebarNav", () => {
     expect(screen.getByRole("navigation", { name: "Primary" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Skip to main content" })).toHaveAttribute("href", "#main-content");
     expect(screen.getByRole("link", { name: "Dashboard" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Expenses" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Expense Inbox" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Upload" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Settings" })).toBeInTheDocument();
   });
 });

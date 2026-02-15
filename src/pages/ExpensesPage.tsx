@@ -11,8 +11,10 @@ export function ExpensesPage() {
   return (
     <section aria-labelledby="expenses-title">
       <header className="page-header">
-        <h2 id="expenses-title">Expenses</h2>
-        <p className="page-subtitle">Review and automate incoming expense events before they hit payroll.</p>
+        <h2 id="expenses-title">Expense Inbox</h2>
+        <p className="page-subtitle">
+          Review and automate incoming expense events before they hit payroll.
+        </p>
       </header>
       <Card>
         <CardHeader>

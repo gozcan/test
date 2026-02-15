@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 
 const navItems = [
   { href: "/", label: "Dashboard" },
-  { href: "/expenses", label: "Expenses" },
+  { href: "/expenses", label: "Expense Inbox" },
+  { href: "/upload", label: "Upload" },
   { href: "/settings", label: "Settings" }
 ];
 
