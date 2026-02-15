@@ -44,11 +44,19 @@
   - CSV export response.
 
 ### Flaky Test Triage
-- Command: `npx -y vitest run`
+- Command: `npx -y vitest run tests/unit/subscription.service.test.ts`
 - Result: `PASS`
-- Files: `3 passed`
-- Tests: `5 passed, 0 failed`
-- Observation: no intermittent failures observed across initial layer runs + full rerun.
+- Files: `1 passed`
+- Tests: `2 passed, 0 failed`
+- Command: `npx -y vitest run tests/integration/billing-quality-insights.contract.test.ts`
+- Result: `PASS`
+- Files: `1 passed`
+- Tests: `2 passed, 0 failed`
+- Command: `npx -y vitest run e2e/subscription-quality-insights-flow.e2e.test.ts`
+- Result: `PASS`
+- Files: `1 passed`
+- Tests: `1 passed, 0 failed`
+- Observation: no intermittent failures observed across reruns of issue-29-specific suites.
 
 ## CI Gate Recommendation
 - Enforce pre-merge gate:
@@ -56,6 +64,12 @@
   - `npx -y vitest run tests/integration`
   - `npx -y vitest run e2e`
 - Gate status for this task: `GREEN`
+
+## Additional Suite Health Note
+- Command: `npx -y vitest run`
+- Result: `FAIL`
+- Reason: unrelated legacy suites in this worktree fail outside issue #29 scope (for example `tests/integration/auth-org-seat-contract.int.test.js`, `e2e/mvp01-auth-org-seat-limits.e2e.test.js`, `e2e/review-and-export.spec.ts`).
+- Impact: issue #29 targeted gate remains green; repository-wide gate is currently red until those suites are remediated.
 
 ## Final Status
 - Acceptance criteria: `PASS`
