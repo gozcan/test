@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { getSubscriptionSnapshot } from "../../src/services/subscription.service";
 
-describe("subscription.service", () => {
-  it("returns starter subscription defaults for tokens and seats", () => {
+describe("subscription service", () => {
+  it("returns starter plan defaults with included tokens and seats", () => {
     const snapshot = getSubscriptionSnapshot();
 
     expect(snapshot.plan).toBe("starter");
@@ -12,7 +12,7 @@ describe("subscription.service", () => {
     expect(snapshot.seats_used).toBe(1);
   });
 
-  it("exposes add-on purchase toggles for dashboard upsell states", () => {
+  it("marks token and seat add-ons as purchasable", () => {
     const snapshot = getSubscriptionSnapshot();
 
     expect(snapshot.can_purchase_extra_tokens).toBe(true);
