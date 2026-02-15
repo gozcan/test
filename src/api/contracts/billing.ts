@@ -1,13 +1,32 @@
-import { z } from "zod";
+export type SubscriptionSnapshot = {
+  plan: string;
+  included_tokens_monthly: number;
+  tokens_used: number;
+  included_seats: number;
+  seats_used: number;
+  can_purchase_extra_tokens: boolean;
+  can_purchase_extra_seats: boolean;
+};
 
-export const subscriptionSnapshotSchema = z.object({
-  plan: z.enum(["starter", "growth", "enterprise"]),
-  included_tokens_monthly: z.number().int().nonnegative(),
-  tokens_used: z.number().int().nonnegative(),
-  included_seats: z.number().int().nonnegative(),
-  seats_used: z.number().int().nonnegative(),
-  can_purchase_extra_tokens: z.boolean(),
-  can_purchase_extra_seats: z.boolean(),
-});
+export type BillingPerformanceEndpointReport = {
+  endpoint: string;
+  sample_count: number;
+  budget_ms: number;
+  p50_ms: number;
+  p95_ms: number;
+  max_ms: number;
+  over_budget: boolean;
+};
 
-export type SubscriptionSnapshot = z.infer<typeof subscriptionSnapshotSchema>;
+export type BillingPerformanceReport = {
+  generated_at: string;
+  window_size: number;
+  endpoints: BillingPerformanceEndpointReport[];
+};
+
+export type ApiErrorResponse = {
+  error: {
+    code: "VALIDATION_ERROR";
+    message: string;
+  };
+};
