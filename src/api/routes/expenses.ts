@@ -1,14 +1,40 @@
-﻿import type { Express, Request, Response } from "express";
+import type { Express, Request, Response } from "express";
+import { ZodError } from "zod";
+import { createExpenseDraftRequestSchema } from "../contracts/expenses";
 import { createExpenseDraftFromDocument } from "../../services/extraction.service";
+import type { ExpenseService } from "../../services/expense.service";
+import { validationError } from "../../server/errors";
+import { asyncHandler } from "../../server/async-handler";
 
-export function registerExpenseRoutes(app: Express) {
-  app.post("/api/documents/extract", async (req: Request, res: Response) => {
-    const draft = await createExpenseDraftFromDocument(req.body ?? {});
-    return res.status(201).json(draft);
-  });
+function zodIssues(error: ZodError): Array<{ path: string; message: string }> {
+  return error.issues.map((issue) => ({
+    path: issue.path.join("."),
+    message: issue.message,
+  }));
+}
 
-  app.get("/api/expenses/export.csv", (_req: Request, res: Response) => {
+export function registerExpenseRoutes(app: Express, expenseService: ExpenseService) {
+  app.post("/api/documents/extract", asyncHandler(async (req: Request, res: Response) => {
+    try {
+      const payload = createExpenseDraftRequestSchema.parse(req.body ?? {});
+      const draft = await createExpenseDraftFromDocument(expenseService, payload);
+      return res.status(201).json(draft);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        throw validationError("Invalid extract request payload", zodIssues(error));
+      }
+      throw error;
+    }
+  }));
+
+  app.get("/api/expenses/export.csv", asyncHandler(async (req: Request, res: Response) => {
+    const workspaceId = req.query.workspace_id;
+    if (typeof workspaceId !== "string" || workspaceId.trim().length === 0) {
+      throw validationError("workspace_id query parameter is required");
+    }
+
+    const csv = await expenseService.exportApprovedCsv(workspaceId);
     res.header("Content-Type", "text/csv");
-    res.send("vendor,amount,status\nSample Vendor,42.50,approved\n");
-  });
+    return res.send(`${csv}\n`);
+  }));
 }
