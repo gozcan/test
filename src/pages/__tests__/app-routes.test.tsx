@@ -22,6 +22,6 @@ describe("app routes", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { level: 2, name: "Expenses" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Expense Inbox" })).toBeInTheDocument();
   });
 });

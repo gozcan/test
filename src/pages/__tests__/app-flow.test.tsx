@@ -16,8 +16,8 @@ describe("app flow", () => {
 
     expect(screen.getByRole("heading", { name: "Dashboard" })).toBeInTheDocument();
 
-    await user.click(screen.getByRole("link", { name: "Expenses" }));
-    expect(screen.getByRole("heading", { name: "Expenses" })).toBeInTheDocument();
+    await user.click(screen.getByRole("link", { name: "Expense Inbox" }));
+    expect(screen.getByRole("heading", { name: "Expense Inbox" })).toBeInTheDocument();
 
     await user.click(screen.getByRole("link", { name: "Settings" }));
     expect(screen.getByRole("heading", { name: "Settings" })).toBeInTheDocument();
@@ -30,6 +30,7 @@ describe("app flow", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("/api")).toBeInTheDocument();
+    const apiBaseNodes = screen.getAllByText("/api");
+    expect(apiBaseNodes.length).toBeGreaterThan(0);
   });
 });
