@@ -1,6 +1,4 @@
-import type { SubscriptionSnapshot } from "../api/contracts/billing";
-
-export function getSubscriptionSnapshot(): SubscriptionSnapshot {
+﻿export function getSubscriptionSnapshot() {
   return {
     plan: "starter",
     included_tokens_monthly: 100000,
