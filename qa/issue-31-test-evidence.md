@@ -14,6 +14,8 @@
 - Fixture: `fixtures/documents/extract-input.json`
 
 ## Execution Results
+Run timestamp: `2026-02-15 22:00 (local)`
+
 ### Unit
 - Command: `npm exec --yes --package vitest -- vitest run tests/unit --reporter=verbose`
 - Result: PASS
