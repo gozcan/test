@@ -1,0 +1,267 @@
+:root {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #102033;
+  background: linear-gradient(160deg, #f4f8ff 0%, #eef6f1 100%);
+
+  --bg: #f8fbff;
+  --surface: #ffffff;
+  --surface-alt: #edf4ff;
+  --text: #102033;
+  --muted: #5a6f85;
+  --border: #c8d6ea;
+  --primary: #0f5fd7;
+  --primary-foreground: #f8fbff;
+  --secondary: #e4ecf9;
+  --secondary-foreground: #123153;
+  --ring: #2a7fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.app-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.app-header {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: radial-gradient(circle at top right, #e8f2ff 0%, var(--surface) 50%);
+  box-shadow: 0 8px 24px rgba(16, 32, 51, 0.08);
+}
+
+.app-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.app-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.sidebar {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: flex-start;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  position: static;
+  left: auto;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  text-decoration: none;
+}
+
+.nav-link {
+  display: block;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  color: var(--secondary-foreground);
+  font-weight: 600;
+  padding: 0.625rem 0.75rem;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.nav-link.active {
+  background: var(--surface-alt);
+  color: var(--primary);
+}
+
+.app-main {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 6px 20px rgba(16, 32, 51, 0.06);
+  padding: 1.25rem;
+}
+
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  background: var(--surface);
+}
+
+.card-neutral {
+  background: var(--surface);
+}
+
+.card-accent {
+  background: var(--surface-alt);
+}
+
+.card-header,
+.card-content {
+  padding: 0.9rem;
+}
+
+.card-title {
+  font-size: 1rem;
+}
+
+.card-description {
+  color: var(--muted);
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.expense-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.expense-list li:last-child {
+  border-bottom: 0;
+}
+
+.expense-merchant {
+  font-weight: 600;
+}
+
+.expense-status {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.setting-highlight {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-sm {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.875rem;
+}
+
+.btn-md {
+  padding: 0.625rem 0.95rem;
+  font-size: 0.95rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.1rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 780px) {
+  .app-body {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
