@@ -20,4 +20,10 @@ describe("Button", () => {
     expect(button.className).toContain("btn-secondary");
     expect(button.className).toContain("btn-lg");
   });
+
+  it("respects an explicit submit type", () => {
+    render(<Button type="submit">Submit</Button>);
+
+    expect(screen.getByRole("button", { name: "Submit" })).toHaveAttribute("type", "submit");
+  });
 });
